@@ -1,4 +1,5 @@
 // server.js
+require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
@@ -11,10 +12,7 @@ const noteRoutes = require("./routes/note");
 app.use("/api/users", userRoutes);
 app.use("/api/notes", noteRoutes);
 
-mongoose.connect("mongodb://localhost:27017/apsona", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose.connect(`${process.env.MONGODB_URI}`);
 
 app.use(bodyParser.json());
 app.use(cors());
